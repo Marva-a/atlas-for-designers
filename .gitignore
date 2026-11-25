@@ -1,0 +1,4 @@
+# Private audit material (for example verbatim exam objectives): used by local checks only. Never commit.
+domains/*/local/
+.DS_Store
+node_modules/

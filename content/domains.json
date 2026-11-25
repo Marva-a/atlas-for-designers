@@ -1,0 +1,37 @@
+{
+ "schema": "atlas.domains.v1",
+ "domains": [
+  {
+   "id": "security",
+   "title": "Security for Product Designers",
+   "short": "Security+",
+   "tagline": "Security knowledge to the CompTIA Security+ (SY0-801) standard, with a product design exercise in every part.",
+   "audience": "Product designers moving into security, identity, network or AI-safety products.",
+   "status": "complete",
+   "maintainers": [
+    "Marva-a"
+   ],
+   "lessons": 60,
+   "weeks": 16,
+   "hours": 139,
+   "hasExams": true,
+   "cases": 3
+  },
+  {
+   "id": "authoring",
+   "title": "How to write an Atlas domain",
+   "short": "Authoring",
+   "tagline": "A short example domain that teaches the domain-pack format by using it.",
+   "audience": "Domain experts and designers who want to write or review a domain for Atlas.",
+   "status": "example",
+   "maintainers": [
+    "Marva-a"
+   ],
+   "lessons": 2,
+   "weeks": 1,
+   "hours": 2,
+   "hasExams": false,
+   "cases": 0
+  }
+ ]
+}

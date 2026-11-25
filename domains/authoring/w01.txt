@@ -1,0 +1,142 @@
+# Example domain: lessons about writing lessons. Every key used here is explained in docs/authoring.md.
+
+@lesson a1-1
+title: What a domain pack is, and how learners move through it
+domain: Understanding the format
+obj: A.1
+level: Beginner
+min: 40
+pre: none
+out: Name the files in a domain pack and what each one holds.
+out: Explain how modules, weeks, sessions and lessons fit together.
+out: Explain why the product design layer is kept apart from the domain lessons.
+why: A domain pack turns one field, such as security or healthcare, into a course designers can follow. If you know the shape before you write, every lesson you add slots into a path that already works: the app, the checks and the progress tracking need no changes.
+plain: A domain pack is a recipe book with a fixed layout. Every recipe has the same sections in the same order, so a reader always knows where to find the ingredients, and a cook can check a new recipe against the layout before it goes in the book.
+tech: A pack lives in domains/<id>/. domain.json holds the title, status, areas (broad parts of the field, which can match an exam's domains), objectives (the specific things learners should be able to do), modules, weeks and the order of sessions in each week. references.json lists every source with its URL, whether it is free, and when it was last opened. Lesson files (*.txt) hold the lessons, questions and labs. The design/ folder holds one design block per lesson, plus any case studies.
+tech: Learners see modules, which group weeks, and weeks, which list sessions in order: lessons, reviews and case studies. A lesson has outcomes, a plain-language explanation, technical detail, terms, examples, a walkthrough, a lab, a scenario, questions, common mistakes, a summary, flashcards and references. The build script, scripts/build-domains.py, refuses to publish a lesson that is missing any of these.
+tech: The design layer is stored separately so that design writing can never make domain knowledge look covered. Each lesson is marked direct (a full design exercise), professional (questions to ask engineering, security and product, with no exercise) or foundation (why it matters, with no exercise).
+table: Files in a domain pack | File | Holds
+| domain.json | Title, status, areas, objectives, modules, weeks and session order
+| references.json | Every source, with URL, cost and the date it was last opened
+| *.txt | Lessons, questions, labs, practice exams
+| design/*.txt | The design layer for each lesson, and case studies
+| local/ | Private material for audits, never committed
+term: Domain pack == One field of study, organized as a folder that the build script turns into a course.
+term: Area == A broad part of a field, such as threats or architecture.
+term: Objective == A specific thing a learner should be able to do, used to map questions and lessons.
+term: Session == One item in a week: a lesson, a review or a case study.
+term: Design layer == The part of each lesson that applies the domain to product design work.
+eg: The security domain has 13 weeks in seven modules. Week 7 lists six lessons, then a review. Each lesson file holds several lessons, and design/d1-w01-07.txt holds their design blocks.
+walk: Find your way around a pack
+- Open domain.json and read the weeks to see the order learners follow.
+- Pick a lesson id from a week and search the *.txt files for @lesson followed by that id.
+- Find its design block in design/ by searching for @d followed by the same id.
+- Check references.json for every ref: line the lesson uses.
+lab: Build a domain on your computer | 20 | Python 3 and a copy of the repository
+do: Download or clone the repository and open a terminal in its folder.
+do: Run: python3 scripts/build-domains.py authoring
+do: Open content/domains/authoring/index.json and find this lesson's title and its question count.
+expect: The build prints the number of lessons, questions and labs, with no problems, and index.json lists both lessons in this domain.
+explain: The build turns plain text into what the app loads. If it reports no problems, the domain is complete enough to publish.
+pass: The build finished without problems.
+pass: You found this lesson in index.json.
+scenario: A healthcare expert wants to add a domain. They have written 20 lessons in a document, each with an explanation and some quiz questions, but no labs, walkthroughs or design notes. What will happen when they try to build it, and what should they do first?
+answer: The build will refuse every lesson, because labs, walkthroughs and design blocks are required. They should first write domain.json with the weeks and objectives, convert one lesson fully, get it through the build and an expert review, and use it as the model for the rest.
+q A.1 mcq e | Pack structure | Where is the order of lessons in each week set?
++ domain.json :: The weeks list sessions in the order learners follow.
+- references.json :: This lists sources.
+- design/ :: This holds the design layer.
+- The order of lessons in the *.txt files :: File order does not decide what learners see.
+q A.1 mcq m | Design layer | Why is the design layer stored separately from the lessons?
++ So that design writing can never make domain knowledge look covered :: Coverage checks read only the lesson text.
+- Because designers and experts may not edit the same files :: Anyone can edit both, through review.
+- To make the files shorter :: Size is not the reason.
+- Because the app does not show design content :: The app shows both, in separate parts.
+q A.1 match e | Files | Match each file to what it holds.
+= domain.json => Weeks, objectives and session order
+= references.json => Sources with their URLs and check dates
+= design/*.txt => The design layer for each lesson
+= local/ => Private audit material, never committed
+why: Each kind of information has one home, so it cannot drift between two places.
+mistake: Writing lessons before domain.json. Plan the weeks and objectives first, so every lesson has a place.
+sum: A pack is domain.json, references.json, lesson files and a design folder.
+sum: Learners move through modules, weeks and sessions in the order domain.json sets.
+sum: The build refuses incomplete lessons, which keeps every domain consistent.
+ref: afd-contributing r
+ref: afd-authoring s
+card: Which file sets the order learners follow? == domain.json, in each week's sessions.
+card: Three kinds of design relevance? == Direct (a full exercise), professional (stakeholder questions) and foundation (why it matters).
+
+@lesson a1-2
+title: Writing a lesson that passes the checks and expert review
+domain: Writing for review
+obj: B.1
+level: Intermediate
+min: 50
+pre: a1-1
+out: Write a lesson block that passes the automated checks.
+out: Write questions whose options each carry a clear explanation.
+out: Explain how AI drafting, references and expert review keep a domain trustworthy.
+why: Learners act on what they read, and hiring managers judge designers by what they learned. A domain is only as good as its least accurate lesson. The format and the checks catch missing parts; people catch wrong facts. This lesson shows how to give both the best chance.
+plain: The build script is a spell checker for structure: it notices a missing section the way a spell checker notices a typo. An expert reviewer is an editor who knows the subject: they notice when a sentence is perfectly formed and simply wrong.
+tech: Each lesson starts with @lesson and an id, followed by one key per line, such as title:, obj:, level:, out:, plain: and tech:. Questions start with q, then the objective, the kind (mcq, multi, tf, order or match) and the difficulty (e, m or h), then the concept and the question. Each option starts with + for right or - for wrong, followed by :: and the reason. Multiple choice needs exactly four options and one right answer. Ordering and matching questions need a why: line.
+tech: Every reference must be listed in references.json with a URL, marked free, and with the date someone last opened it. A link that has not been opened is not added. Lessons may be drafted with AI, but the draft must say so in the pull request, and a domain expert must review it before it is merged. Reviewers check facts, emphasis and examples, not just wording.
+tech: Write plainly. Prefer short sentences, define every acronym the first time, and give one concrete example for each idea. Put the commonly confused pair in a table. Explain why each wrong option is wrong, because that is where most learning happens.
+table: Question kinds | Kind | Rule
+| mcq | Four options, exactly one right
+| tf | Options True and False, one right
+| multi | At least four options, two or more right and at least one wrong
+| order | At least three steps, plus a why: line
+| match | At least three pairs with unique answers, plus a why: line
+term: Lesson block == The lines from @lesson to the next @lesson, holding one complete lesson.
+term: Option explanation == The reason after :: that says why an option is right or wrong.
+term: Expert review == A check by someone who works in the field, focused on accuracy and emphasis.
+term: AI disclosure == Saying in the pull request that a draft was written with an AI model.
+eg: A question with three options fails the build with: multiple choice needs four options. Adding a plausible fourth option, with its reason, fixes it.
+eg: A reviewer notices that a lesson calls a technique outdated when it is still recommended. The build could never catch this; the review did.
+walk: Take one lesson from draft to merged
+- Copy a lesson block from an existing domain as a starting point.
+- Replace the content, keeping every key, and add the design block in design/.
+- Add any new sources to references.json, after opening each one.
+- Run the build and fix every problem it lists.
+- Open a pull request, say whether AI was used, and ask a domain expert to review.
+- Make the reviewer's changes, then the lesson can be merged.
+lab: Break and fix a question | 25 | Python 3 and a copy of the repository
+do: In domains/authoring/w01.txt, remove one wrong option from the first question of this lesson.
+do: Run: python3 scripts/build-domains.py authoring and read the problem it reports.
+do: Put the option back, run the build again and confirm that it passes.
+expect: The first run reports that multiple choice needs four options; the second run reports no problems.
+explain: The checks are fast and specific, so you find structural mistakes in seconds and save reviewers' time for the facts.
+pass: You saw the build reject the broken question.
+pass: The build passed after your fix.
+scenario: A contributor submits ten lessons drafted with AI in one afternoon. All ten pass the build. The pull request does not mention AI, and no expert has reviewed it. What should the maintainer do?
+answer: Ask the contributor to disclose how the drafts were made, and hold the merge until a domain expert has reviewed each lesson. Passing the build proves the structure is complete, not that the facts are right. Suggest splitting the work into smaller pull requests, so a reviewer can check each lesson properly.
+q B.1 mcq e | Question format | A multiple-choice question has three options. What happens when the domain is built?
++ The build reports a problem and does not publish the domain :: Multiple choice needs exactly four options.
+- The app shows the question with three options :: The build stops before publishing.
+- The build adds a fourth option :: It never invents content.
+- Nothing, three options are allowed :: Four are required.
+q B.1 mcq m | Review | What can expert review catch that the build cannot?
++ A well-formed statement that is factually wrong :: The build checks structure, not truth.
+- A missing walkthrough :: The build catches missing sections.
+- A question with two right answers in multiple choice :: The build catches this.
+- A reference that is not in references.json :: The build catches this too.
+q B.1 tf m | AI drafting | True or false: a lesson drafted with AI can be merged as soon as it passes the build.
++ False :: It also needs disclosure and a domain expert's review.
+- True :: Passing the build proves structure, not accuracy.
+q B.1 order m | Workflow | Put these steps in order.
+1. Copy a lesson block as a starting point
+2. Write the content and its design block
+3. Run the build and fix every problem
+4. Open a pull request and request an expert review
+why: Structural problems are fixed before a person spends time reviewing.
+mistake: Treating a passing build as proof of quality. It proves the lesson is complete, not that it is correct.
+mistake: Adding a reference without opening it. Every link must have been checked by a person.
+sum: Keep every key, explain every option and define every acronym.
+sum: The build checks structure; experts check facts.
+sum: Disclose AI drafting, and never merge without expert review.
+ref: afd-authoring r
+ref: afd-security-sample s
+ref: afd-contributing s
+card: What follows :: in an option line? == The explanation of why that option is right or wrong.
+card: What does a passing build prove? == That the lesson is complete and well formed, not that it is correct.

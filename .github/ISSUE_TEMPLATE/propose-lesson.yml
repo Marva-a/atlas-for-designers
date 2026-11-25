@@ -1,0 +1,30 @@
+name: Propose a lesson
+description: Suggest a lesson to add to an existing domain.
+labels: ["content: lesson"]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+    validations:
+      required: true
+  - type: textarea
+    id: topic
+    attributes:
+      label: Topic and why it matters
+      description: What would learners be able to do afterwards, and why does it matter for designers in this field?
+    validations:
+      required: true
+  - type: input
+    id: place
+    attributes:
+      label: Where it fits
+      description: Which week, and which lessons it should come after.
+  - type: dropdown
+    id: write
+    attributes:
+      label: Would you write it?
+      options:
+        - Yes, I'll write it
+        - I'd like someone else to write it
+        - I could review it

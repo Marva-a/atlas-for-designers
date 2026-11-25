@@ -1,0 +1,5 @@
+[
+ {"id": "afd-contributing", "title": "Contributing to Atlas for Designers", "org": "Atlas for Designers", "url": "https://github.com/Marva-a/atlas-for-designers/blob/main/CONTRIBUTING.md", "type": "Guide", "minutes": 15, "free": true, "access": "Free to read, no account.", "verified": "checked when published"},
+ {"id": "afd-authoring", "title": "Domain-pack authoring standard", "org": "Atlas for Designers", "url": "https://github.com/Marva-a/atlas-for-designers/blob/main/docs/authoring.md", "type": "Standard", "minutes": 25, "free": true, "access": "Free to read, no account.", "verified": "checked when published"},
+ {"id": "afd-security-sample", "title": "A complete lesson source file (Security domain, Week 7)", "org": "Atlas for Designers", "url": "https://github.com/Marva-a/atlas-for-designers/blob/main/domains/security/w07.txt", "type": "Example", "minutes": 20, "free": true, "access": "Free to read, no account.", "verified": "checked when published"}
+]

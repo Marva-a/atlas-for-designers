@@ -1,0 +1,25 @@
+{
+ "id": "authoring",
+ "title": "How to write an Atlas domain",
+ "short": "Authoring",
+ "tagline": "A short example domain that teaches the domain-pack format by using it.",
+ "audience": "Domain experts and designers who want to write or review a domain for Atlas.",
+ "status": "example",
+ "maintainers": ["Marva-a"],
+ "objectiveLabel": "Goal",
+ "notices": ["This is an example domain. It shows every part of the format, so contributors can see how a lesson looks before writing their own."],
+ "areas": {"A": {"name": "Understanding the format", "weight": 50}, "B": {"name": "Writing for review", "weight": 50}},
+ "objectives": [
+  {"id": "A.1", "short": "How a domain pack is organized"},
+  {"id": "B.1", "short": "Writing a lesson that passes review"}
+ ],
+ "weeks": [
+  {"n": 1, "phase": "domain", "title": "Writing a domain pack", "outcome": "Explain how a domain pack is organized and write a lesson that passes the automated checks and expert review.", "sessions": [
+   {"type": "lesson", "id": "a1-1"},
+   {"type": "lesson", "id": "a1-2"},
+   {"type": "review", "title": "Check your understanding", "min": 15, "link": "#quiz/week-1"}
+  ]}
+ ],
+ "sections": [["", "Overview"], ["curriculum", "Curriculum"], ["design", "Product design practice"], ["labs", "Hands-on labs"], ["checks", "Knowledge checks"], ["library", "Reference library and glossary"], ["progress", "Progress dashboard"]],
+ "modules": [{"n": 1, "title": "Authoring", "weeks": [1], "security": "The domain-pack format, the build checks and the review process.", "design": "Every lesson pairs domain knowledge with a product design layer."}]
+}

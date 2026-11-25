@@ -1,0 +1,36 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build every domain (refuses incomplete or malformed lessons)
+        run: python3 scripts/build-domains.py
+      - name: Built content is committed and up to date
+        run: |
+          if ! git diff --quiet -- content/; then
+            echo "::error::content/ is out of date. Run python3 scripts/build-domains.py and commit the result."
+            git diff --stat -- content/
+            exit 1
+          fi
+      - name: Scoring rules and every answer key
+        run: node js/cert-selftest.js
+      - name: Sync merging, encryption and pairing
+        run: node js/sync-selftest.js
+      - name: Sync service
+        run: node --no-warnings sync-worker/test.mjs

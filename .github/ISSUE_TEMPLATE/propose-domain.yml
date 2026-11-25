@@ -1,0 +1,28 @@
+name: Propose a domain
+description: Suggest a new field for designers to learn, such as healthcare or fintech.
+labels: ["domain: proposal"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Domain name
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who is it for, and why do designers need it?
+    validations:
+      required: true
+  - type: textarea
+    id: standard
+    attributes:
+      label: Standard or syllabus
+      description: A recognised standard, regulation, certification or framework it would follow, if any.
+  - type: textarea
+    id: maintainers
+    attributes:
+      label: Who will maintain and review it?
+      description: A domain needs at least one committed expert reviewer before work starts.
+    validations:
+      required: true

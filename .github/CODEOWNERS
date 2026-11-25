@@ -1,0 +1,5 @@
+# Every change is reviewed by the design editor. Each domain also needs its own maintainer's approval.
+# Add a domain's maintainers here when the domain is created.
+*                      @Marva-a
+/domains/security/     @Marva-a
+/domains/authoring/    @Marva-a

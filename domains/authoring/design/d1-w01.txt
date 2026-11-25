@@ -1,0 +1,12 @@
+@d a1-1 foundation
+sector: Learning products
+product: A predictable lesson shape is itself a design decision: learners always know where the example, the lab and the questions are, which lowers effort and makes progress easy to see.
+noex: This lesson describes the format; the next lessons in any domain apply it.
+
+@d a1-2 professional
+sector: Learning products
+product: Every domain is an information product that people act on. The review workflow is part of its user experience: it decides how quickly errors are found, and how much learners can trust what they read.
+ask eng: Can the build run on every pull request, so contributors see problems before review?
+ask sec: How are contributions checked for copied or unlicensed material?
+ask prod: How do learners report an error, and how quickly is it fixed?
+noex: The review checklist in docs/authoring.md is the practical form of this lesson.

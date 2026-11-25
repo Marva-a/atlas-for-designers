@@ -1,0 +1,34 @@
+name: Report an error
+description: Something in a lesson is wrong, outdated or unclear.
+labels: ["content: error"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Domain and lesson
+      description: For example "Security, w6-5" or the lesson title.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: Quote the text if you can, and say what it should say instead.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A free, reliable source that supports the correction, if you have one.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: How serious is it?
+      options:
+        - Factually wrong
+        - Outdated
+        - Unclear or confusing
+        - Typo or small wording issue
+    validations:
+      required: true

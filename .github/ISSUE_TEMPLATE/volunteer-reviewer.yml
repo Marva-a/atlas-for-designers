@@ -1,0 +1,29 @@
+name: Volunteer as a reviewer
+description: Review lessons in a domain you work in. Reviewers are credited by name.
+labels: ["reviewer"]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Which domain?
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: Your experience in this field
+      description: Your role and years of experience, and anything that helps us match you to lessons.
+    validations:
+      required: true
+  - type: input
+    id: time
+    attributes:
+      label: How much time could you give?
+      description: For example "two lessons a month". Reviewing one lesson usually takes one to two hours.
+  - type: checkboxes
+    id: agree
+    attributes:
+      label: Agreement
+      options:
+        - label: I have read the review checklist in docs/authoring.md and the code of conduct.
+          required: true
